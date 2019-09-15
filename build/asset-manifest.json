@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/apps/static/css/main.2cce8147.chunk.css",
-    "main.js": "/apps/static/js/main.06102722.chunk.js",
-    "main.js.map": "/apps/static/js/main.06102722.chunk.js.map",
-    "runtime~main.js": "/apps/static/js/runtime~main.32364431.js",
-    "runtime~main.js.map": "/apps/static/js/runtime~main.32364431.js.map",
-    "static/js/2.7035cb4d.chunk.js": "/apps/static/js/2.7035cb4d.chunk.js",
-    "static/js/2.7035cb4d.chunk.js.map": "/apps/static/js/2.7035cb4d.chunk.js.map",
-    "index.html": "/apps/index.html",
-    "precache-manifest.b31cbb64c27ff278acdae9b3aaf3c667.js": "/apps/precache-manifest.b31cbb64c27ff278acdae9b3aaf3c667.js",
-    "service-worker.js": "/apps/service-worker.js",
-    "static/css/main.2cce8147.chunk.css.map": "/apps/static/css/main.2cce8147.chunk.css.map",
-    "static/media/logo.svg": "/apps/static/media/logo.5d5d9eef.svg"
+    "main.css": "/apps/Kensan/static/css/main.2cce8147.chunk.css",
+    "main.js": "/apps/Kensan/static/js/main.a7cfbc02.chunk.js",
+    "main.js.map": "/apps/Kensan/static/js/main.a7cfbc02.chunk.js.map",
+    "runtime~main.js": "/apps/Kensan/static/js/runtime~main.460410bc.js",
+    "runtime~main.js.map": "/apps/Kensan/static/js/runtime~main.460410bc.js.map",
+    "static/js/2.7035cb4d.chunk.js": "/apps/Kensan/static/js/2.7035cb4d.chunk.js",
+    "static/js/2.7035cb4d.chunk.js.map": "/apps/Kensan/static/js/2.7035cb4d.chunk.js.map",
+    "index.html": "/apps/Kensan/index.html",
+    "precache-manifest.247f2c5bc9deac0c8c32b4732fc5068c.js": "/apps/Kensan/precache-manifest.247f2c5bc9deac0c8c32b4732fc5068c.js",
+    "service-worker.js": "/apps/Kensan/service-worker.js",
+    "static/css/main.2cce8147.chunk.css.map": "/apps/Kensan/static/css/main.2cce8147.chunk.css.map",
+    "static/media/logo.svg": "/apps/Kensan/static/media/logo.5d5d9eef.svg"
   }
 }
