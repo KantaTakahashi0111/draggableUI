@@ -1,0 +1,17 @@
+.item {
+	display: flex;
+	height: 50px;
+	width: 100px;
+	border-radius: 5px;
+	line-height: 50px;
+	padding: 0 10px;
+	position: absolute;
+	cursor: pointer;
+
+
+	&__name {
+		color: $white;
+		font-size: 2rem;
+		font-weight: $fw-bold;
+	}
+}

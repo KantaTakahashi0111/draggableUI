@@ -1,0 +1,19 @@
+
+.kensanHeader {
+
+  &__buttonArea{
+    display: flex;
+    background-color: $main-green;
+    height: 40px;
+    padding: 0 20px;
+
+  }
+}
+
+.menuButtonContainer {
+    padding: 5px 0;
+}
+
+.menuButton {
+    @include reset-button;
+}

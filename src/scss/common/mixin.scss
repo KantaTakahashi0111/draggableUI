@@ -1,0 +1,18 @@
+@mixin media-pc {
+    @media screen and (min-width: $breakpoint-pc) {
+        @content;
+    }
+}
+
+@mixin media-tablet {
+    @media screen and (min-width: $breakpoint-tablet) {
+        @content;
+    }
+}
+
+@mixin reset-button {
+    background: none;
+    outline: 0;
+		border: none;
+		cursor: pointer;
+}

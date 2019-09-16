@@ -1,0 +1,13 @@
+.processMenuBar {
+    display: flex;
+    margin-left: 85px;
+
+    &__item {
+        height: 5px;
+        width: 200px;
+
+        &--active {
+          background-color: $process-blue;
+        }
+    }
+}

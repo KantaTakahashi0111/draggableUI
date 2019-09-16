@@ -1,0 +1,26 @@
+.processMenu {
+    margin-left: 20px;
+
+    &__list {
+      display: flex;
+    }
+
+    &__item {
+        border-left: 1px solid $white;
+      
+        &:last-child {
+          border-right: 1px solid $white;
+        }
+    }
+
+    &__button {
+        @include reset-button;
+        width: 200px;
+        height: 40px;
+        font-size: 2rem;
+        line-height: 2;
+        font-weight: normal;
+        color: $white;
+        font-weight: $fw-bold;
+    }
+}
