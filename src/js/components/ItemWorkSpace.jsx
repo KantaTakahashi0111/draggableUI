@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import ItemWorkSpaceMenu from "./ItemWorkSpaceMenu";
 import Item from "./Item";
 
+import KensanConst from '../KensanConst';
+
 class ItemWorkSpace extends Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +18,11 @@ class ItemWorkSpace extends Component {
 				<ItemWorkSpaceMenu />
 				<div className="itemContainer">
 					{items.map(item => (
-						<Item itemInfo={item} position={item.position} />
+						<Item
+							itemInfo={item}
+							position={item.position}
+							type={KensanConst.ItemType.Item}
+						/>
 					))}
 				</div>
 			</div>

@@ -1,6 +1,8 @@
 const KensanConst = {
 	ItemType: {
-		Item: "item"
+		Item: "item",
+		InnerItem: "InnerItem",
+		Set: "set"
 	},
 	SET_HEADER_HEIGHT: 40
 };

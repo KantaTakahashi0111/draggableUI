@@ -25,6 +25,19 @@ class App extends Component {
 						border: "3px solid #F271D8"
 					},
 					containedItems: []
+				},
+				{
+					set_id: 10,
+					name: "セットB",
+					color: "#4DC4F1",
+					position: {
+						x: 350,
+						y: 80
+					},
+					style: {
+						border: "3px solid #4DC4F1"
+					},
+					containedItems: []
 				}
 			],
 			items: [
@@ -64,7 +77,10 @@ class App extends Component {
 		// position: relativeで表示する座標に変換する
 		const relativePosition = {
 			x: droppedPosition.x - droppedSet.position.x,
-			y: droppedPosition.y - droppedSet.position.y - KensanConst.SET_HEADER_HEIGHT,
+			y:
+				droppedPosition.y -
+				droppedSet.position.y -
+				KensanConst.SET_HEADER_HEIGHT
 		};
 
 		// セット内の座標とitemIdをセットで追加する
@@ -73,6 +89,17 @@ class App extends Component {
 			position: relativePosition
 		};
 		droppedSet.containedItems.push(droppedItemInfo);
+	}
+
+	// セット内アイテムを外にドロップしたときの処理
+	handleItemTrash(setId, innerItemId) {
+		const { sets } = this.state;
+
+		const targetSet = sets.find(element => element.set_id === setId);
+		const newInnerItems = targetSet.containedItems.filter(
+			(element, index) => index !== innerItemId
+		);
+		targetSet.containedItems = newInnerItems;
 	}
 
 	render() {
@@ -87,6 +114,9 @@ class App extends Component {
 						items={items}
 						onDrop={(setId, itemId, droppedPosition) => {
 							this.handleItemDrop(setId, itemId, droppedPosition);
+						}}
+						onTrash={(setId, innerItemId) => {
+							this.handleItemTrash(setId, innerItemId);
 						}}
 					/>
 					<ItemWorkSpace items={items} />
