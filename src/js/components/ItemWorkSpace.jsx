@@ -6,29 +6,17 @@ import Item from "./Item";
 class ItemWorkSpace extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			items: [
-				{
-					name: "アイテム１",
-					color: "#F271D8",
-					style: {
-						backgroundColor: "#F271D8",
-						top: 20,
-						left: 20
-					}
-				}
-			]
-		};
 	}
 
 	render() {
+		const { items } = this.props;
+
 		return (
 			<div className="itemWorkSpace">
 				<ItemWorkSpaceMenu />
 				<div className="itemContainer">
-					{this.state.items.map(item => (
-						<Item itemInfo={item} />
+					{items.map(item => (
+						<Item itemInfo={item} position={item.position} />
 					))}
 				</div>
 			</div>
