@@ -14,7 +14,7 @@ class ItemWorkSpaceMenu extends Component {
 			{
 				iconSrc: plusIcon,
 				alt: "追加",
-				onClick: () => {}
+				onClick: this.props.onPlusClick
 			},
 			{
 				iconSrc: copyIcon,

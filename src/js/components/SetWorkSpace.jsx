@@ -13,7 +13,8 @@ const SetWorkSpace = ({
 	onTrash,
 	onInnerMove,
 	onTransfer,
-	onSetMove
+	onSetMove,
+	onPlusClick
 }) => {
 	const [{ isOver }, drop] = useDrop({
 		accept: [KensanConst.ItemType.InnerItem, KensanConst.ItemType.Set],
@@ -44,7 +45,7 @@ const SetWorkSpace = ({
 
 	return (
 		<div className="setWorkSpace" style={style} ref={drop}>
-			<SetWorkSpaceMenu />
+			<SetWorkSpaceMenu onPlusClick={onPlusClick} />
 			{sets.map(set => (
 				<Set
 					key={set.set_id}

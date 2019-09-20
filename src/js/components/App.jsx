@@ -13,61 +13,57 @@ class App extends Component {
 
 		this.state = {
 			a: 1,
-			sets: [
-				{
-					set_id: 1,
-					name: "トレーニングA",
-					color: "#F19F4D",
-					position: {
-						x: 50,
-						y: 80
-					},
-					style: {
-						border: "3px solid #F19F4D"
-					},
-					containedItems: []
-				},
-				{
-					set_id: 10,
-					name: "トレーニングB",
-					color: "#8FE23C",
-					position: {
-						x: 350,
-						y: 80
-					},
-					style: {
-						border: "3px solid #8FE23C"
-					},
-					containedItems: []
-				}
-			],
-			items: [
-				{
-					item_id: 1,
-					name: "腹筋ローラー",
-					color: "#F271D8",
-					position: {
-						x: 20,
-						y: 20
-					},
-					style: {
-						backgroundColor: "#F271D8"
-					}
-				},
-				{
-					item_id: 10,
-					name: "ベンチプレス",
-					color: "#4DC4F1",
-					position: {
-						x: 200,
-						y: 20
-					},
-					style: {
-						backgroundColor: "#4DC4F1"
-					}
-				}
-			]
+			sets: [],
+			items: []
 		};
+	}
+
+	changeItemName(itemId, newName) {
+		const targetItem = this.getItembyId(itemId);
+		targetItem.name = newName;
+		console.log(newName);
+	}
+
+	changeSetName(sedId, newName) {
+		const targetSet = this.getSetbyId(sedId);
+		targetSet.name = newName;
+		console.log(newName);
+	}
+
+	createSet(position, name = "", color = "red") {
+		const { sets } = this.state;
+
+		const newSet = {
+			set_id: sets.length,
+			name,
+			position,
+			color,
+			style: {
+				border: `3px solid ${color}`
+			},
+			containedItems: []
+		};
+
+		const addedSets = sets.concat(newSet);
+
+		this.setState({ sets: addedSets });
+	}
+
+	createItem(position, name = "", color = "red") {
+		const { items } = this.state;
+		const newItem = {
+			item_id: items.length,
+			name,
+			color,
+			position,
+			style: {
+				backgroundColor: color
+			}
+		};
+
+		const addedItems = items.concat(newItem);
+
+		this.setState({ items: addedItems });
 	}
 
 	getContainedItemId(setId, innerItemId) {
@@ -82,11 +78,20 @@ class App extends Component {
 		return sets.find(element => element.set_id === setId);
 	}
 
+	//アイテムIDからアイテムを取得
+	getItembyId(itemId) {
+		const { items } = this.state;
+		return items.find(element => element.item_id === itemId);
+	}
+
 	//SetのPositionがrelativeのときの座標を計算する
 	getRelativeSetPosition(absolutePosition) {
+		// 絶対座標にスクロール分のY座標を足す
+		const scrollY = window.scrollY;
+
 		const relativePosition = {
 			x: absolutePosition.x,
-			y: absolutePosition.y - KensanConst.APP_HEADER_HEIGHT
+			y: absolutePosition.y - KensanConst.APP_HEADER_HEIGHT + scrollY
 		};
 
 		return relativePosition;
@@ -95,12 +100,18 @@ class App extends Component {
 	// 絶対座標ではウィンドウのリサイズに対応できない
 	// 絶対座標から指定されたSETへの相対座標を算出する
 	getRelativePosition(setId, absolutePosition) {
+		// 絶対座標にスクロール分のY座標を足す
+		const scrollY = window.scrollY;
 		// セットIDから操作があったセットを特定する
 		const set = this.getSetbyId(setId);
 		// position: relativeで表示する座標に変換する
 		const relativePosition = {
 			x: absolutePosition.x - set.position.x,
-			y: absolutePosition.y - set.position.y - KensanConst.SET_HEADER_HEIGHT
+			y:
+				absolutePosition.y -
+				set.position.y -
+				KensanConst.SET_HEADER_HEIGHT +
+				scrollY
 		};
 		return relativePosition;
 	}
@@ -166,6 +177,44 @@ class App extends Component {
 		this.addItemToSet(toSetId, transferedItemId, droppedPosition);
 	}
 
+	// セットメニューのプラスがクリックされたときの処理
+	handleSetPlusClick() {
+		const position = {
+			x:
+				this.state.sets.length * KensanConst.SET_GRID_X +
+				KensanConst.WORKSPACE_PADDING_LEFT,
+			y: KensanConst.SET_Y
+		};
+		const name = `トレーニング${this.state.sets.length + 1}`;
+		const color =
+			KensanConst.SET_COLORS[
+				this.state.sets.length % KensanConst.SET_COLORS.length
+			];
+
+		this.createSet(position, name, color);
+	}
+
+	//　アイテムメニューのプラスがクリックされたときの処理
+	handleItemPlusClick() {
+		const position = {
+			x:
+				this.state.items.length * KensanConst.ITEM_GRID_X +
+				KensanConst.ITEM_WORKSPACE_PADDING_LEFT,
+			y: KensanConst.ITEM_Y
+		};
+		const name =
+			KensanConst.ITEM_NAMES[
+				this.state.items.length % KensanConst.ITEM_NAMES.length
+			];
+
+		const color =
+			KensanConst.ITEM_COLORS[
+				this.state.items.length % KensanConst.ITEM_COLORS.length
+			];
+		console.log("plus");
+		this.createItem(position, name, color);
+	}
+
 	render() {
 		const { sets, items } = this.state;
 
@@ -191,8 +240,19 @@ class App extends Component {
 						onSetMove={(setId, droppedPosition) => {
 							this.handleSetMove(setId, droppedPosition);
 						}}
+						onPlusClick={() => {
+							this.handleSetPlusClick();
+						}}
+						onItemNameChange={(itemId, newName) => {
+							this.ItemNameChange(itemId, newName);
+						}}
 					/>
-					<ItemWorkSpace items={items} />
+					<ItemWorkSpace
+						items={items}
+						onItemPlusClick={() => {
+							this.handleItemPlusClick();
+						}}
+					/>
 				</div>
 			</DndProvider>
 		);

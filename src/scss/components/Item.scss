@@ -7,11 +7,15 @@
 	padding: 0 10px;
 	position: absolute;
 	cursor: pointer;
-
+	transition: box-shadow .2s;
 
 	&__name {
 		color: $white;
 		font-size: 2rem;
 		font-weight: $fw-bold;
+	}
+
+	&:hover {
+		box-shadow: $hover-blue 0 0 15px;
 	}
 }
