@@ -5,12 +5,25 @@ import { useDrop, useDrag } from "react-dnd";
 import KensanConst from "../KensanConst";
 import Item from "./Item";
 
-const Set = ({ setInfo, onDrop, items, position }) => {
+const Set = ({ setInfo, onDrop, items, position, onInnerMove, onTransfer }) => {
 	const [{ isOver }, drop] = useDrop({
-		accept: KensanConst.ItemType.Item,
+		accept: [KensanConst.ItemType.Item, KensanConst.ItemType.InnerItem],
 		drop: (item, monitor) => {
 			const droppedPosition = monitor.getSourceClientOffset();
-			onDrop(setInfo.set_id, item.info.item_id, droppedPosition);
+			if (item.type === KensanConst.ItemType.Item) {
+				onDrop(setInfo.set_id, item.info.item_id, droppedPosition);
+			} else {
+				if (item.innerItemInfo.setId === setInfo.set_id) {
+					onInnerMove(
+						item.innerItemInfo.setId,
+						item.innerItemInfo.innerItemId,
+						droppedPosition
+					);
+					return;
+				}
+				// 落とされたinnerItemの所属IDが自分でなければ輸送とみなす
+				onTransfer(setInfo.set_id, item.innerItemInfo, droppedPosition);
+			}
 		},
 		collect: monitor => ({
 			isOver: !!monitor.isOver()
@@ -18,7 +31,7 @@ const Set = ({ setInfo, onDrop, items, position }) => {
 	});
 
 	const [{ isDragging }, drag] = useDrag({
-		item: { type: KensanConst.ItemType.Set, info: setInfo },
+		item: { type: KensanConst.ItemType.Set, setInfo },
 		collect: monitor => ({
 			isDragging: !!monitor.isDragging()
 		})
@@ -35,13 +48,14 @@ const Set = ({ setInfo, onDrop, items, position }) => {
 	const newStyle = Object.assign(extraStyle, setInfo.style);
 
 	return (
-		<section className="set" style={newStyle} ref={drop}>
+		<section className="set" style={newStyle} ref={drag}>
 			<h2 className="set__name" style={{ backgroundColor: setInfo.color }}>
 				{setInfo.name}
 			</h2>
-			<ul className="set__itemList">
+			<ul className="set__itemList" ref={drop}>
 				{setInfo.containedItems.map((containedItem, index) => (
 					<Item
+						key={index}
 						innerItemInfo={{
 							innerItemId: index,
 							setId: setInfo.set_id
@@ -61,7 +75,9 @@ const Set = ({ setInfo, onDrop, items, position }) => {
 Set.propTypes = {
 	setInfo: PropTypes.shape({
 		name: PropTypes.string
-	})
+	}),
+	position: PropTypes.shape(),
+	items: PropTypes.arrayOf(PropTypes.shape())
 };
 
 export default Set;
