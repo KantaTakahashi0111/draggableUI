@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "49e8add8db196b7d149ab56d48c96c17",
+    "revision": "20681f57c72b2a7ab31d45a036ea5052",
     "url": "/apps/Kensan/index.html"
   },
   {
-    "revision": "1fcf8723a4e9fa753eee",
-    "url": "/apps/Kensan/static/css/main.edfc354b.chunk.css"
+    "revision": "977520f76ea3262fa9c7",
+    "url": "/apps/Kensan/static/css/main.659fe767.chunk.css"
   },
   {
     "revision": "b2192a13cbbb283de132",
     "url": "/apps/Kensan/static/js/2.41d7e488.chunk.js"
   },
   {
-    "revision": "1fcf8723a4e9fa753eee",
-    "url": "/apps/Kensan/static/js/main.2797c27b.chunk.js"
+    "revision": "977520f76ea3262fa9c7",
+    "url": "/apps/Kensan/static/js/main.5128de5d.chunk.js"
   },
   {
     "revision": "522444a02b0e2f9465e6",
