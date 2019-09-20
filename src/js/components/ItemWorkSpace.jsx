@@ -11,11 +11,11 @@ class ItemWorkSpace extends Component {
 	}
 
 	render() {
-		const { items } = this.props;
+		const { items, onItemNameChange, onItemPlusClick } = this.props;
 
 		return (
 			<div className="itemWorkSpace">
-				<ItemWorkSpaceMenu />
+				<ItemWorkSpaceMenu onPlusClick={onItemPlusClick} />
 				<div className="itemContainer">
 					{items.map(item => (
 						<Item
@@ -23,6 +23,7 @@ class ItemWorkSpace extends Component {
 							itemInfo={item}
 							position={item.position}
 							type={KensanConst.ItemType.Item}
+							onItemNameChange={onItemNameChange}
 						/>
 					))}
 				</div>

@@ -2,9 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
 
+import NameTextBox from "./NameTextBox";
 import KensanConst from "../KensanConst";
 
-const Item = ({ itemInfo, position, type, innerItemInfo }) => {
+const Item = ({
+	itemInfo,
+	position,
+	type,
+	innerItemInfo,
+	onItemNameChange
+}) => {
 	const [{ isDragging }, drag] = useDrag({
 		item: {
 			type,
@@ -12,7 +19,7 @@ const Item = ({ itemInfo, position, type, innerItemInfo }) => {
 			innerItemInfo
 		},
 		collect: monitor => ({
-			isDragging: !!monitor.isDragging(),
+			isDragging: !!monitor.isDragging()
 		})
 	});
 
@@ -26,6 +33,7 @@ const Item = ({ itemInfo, position, type, innerItemInfo }) => {
 	return (
 		<section className="item" style={newStyle} ref={drag}>
 			<h2 className="item__name">{itemInfo.name}</h2>
+			{/* <NameTextBox onChange={onItemNameChange} /> */}
 		</section>
 	);
 };
