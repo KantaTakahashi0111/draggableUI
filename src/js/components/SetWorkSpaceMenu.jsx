@@ -38,6 +38,7 @@ class SetWorkSpaceMenu extends Component {
 			<ul className="setWorkSpaceMenu" style={this.state.position}>
 				{this.menus.map(menu => (
 					<MenuItem
+						key={menu.alt}
 						alt={menu.alt}
 						iconSrc={menu.iconSrc}
 						onClick={menu.onClick}

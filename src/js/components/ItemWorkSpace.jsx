@@ -19,6 +19,7 @@ class ItemWorkSpace extends Component {
 				<div className="itemContainer">
 					{items.map(item => (
 						<Item
+							key={item.item_id}
 							itemInfo={item}
 							position={item.position}
 							type={KensanConst.ItemType.Item}

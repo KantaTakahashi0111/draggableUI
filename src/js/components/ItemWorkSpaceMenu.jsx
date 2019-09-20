@@ -33,6 +33,7 @@ class ItemWorkSpaceMenu extends Component {
 			<ul className="itemWorkSpaceMenu" style={this.state.position}>
 				{this.menus.map(menu => (
 					<MenuItem
+						key={menu.alt}
 						alt={menu.alt}
 						iconSrc={menu.iconSrc}
 						onClick={menu.onClick}
